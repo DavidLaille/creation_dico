@@ -6,7 +6,7 @@ import csv
 import time
 
 
-adj_path = 'C:/dev/PycharmProjects/creation_dico/data/lemmes_adj2.csv'
+adj_path = 'data/lemmes_adj2.csv'
 adjs = pd.read_csv(adj_path, sep=',')
 
 # récupération du html avec une requête get

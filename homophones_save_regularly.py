@@ -2,7 +2,7 @@ import csv
 
 import pandas as pd
 
-LEXIQUE = 'C:/dev/PycharmProjects/creation_dico/data/Lexique383.tsv'
+LEXIQUE = 'data/Lexique383.tsv'
 lex = pd.read_csv(LEXIQUE, sep='\t')
 # print(lex.head())
 

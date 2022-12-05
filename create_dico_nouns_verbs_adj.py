@@ -2,9 +2,9 @@ from wiktionnaireparser import WiktionnaireParser as wiktp
 import csv
 import pandas as pd
 
-nouns_path = 'C:/dev/PycharmProjects/creation_dico/data/lemmes_noms2.csv'
-verbs_path = 'C:/dev/PycharmProjects/creation_dico/data/lemmes_verbes2.csv'
-adj_path = 'C:/dev/PycharmProjects/creation_dico/data/lemmes_adj2.csv'
+nouns_path = 'data/lemmes_noms2.csv'
+verbs_path = 'data/lemmes_verbes2.csv'
+adj_path = 'data/lemmes_adj2.csv'
 
 nouns = pd.read_csv(nouns_path, sep=',')
 verbs = pd.read_csv(verbs_path, sep=',')

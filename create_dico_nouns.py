@@ -7,7 +7,7 @@ url_base_wiki_online = 'https://fr.wiktionary.org/wiki/'
 url_base_wiki_local_old = 'http://127.0.0.1:8080/wiktionary_fr_all_maxi_2022-07/A/'
 url_base_wiki_local = 'http://127.0.0.1:8080/wiktionary_fr_all_nopic_2022-10/A/'
 
-nouns_path = 'C:/dev/PycharmProjects/creation_dico/data/lemmes_noms2.csv'
+nouns_path = 'data/lemmes_noms2.csv'
 nouns = pd.read_csv(nouns_path, sep=',')
 
 # Quelques prints pour vérifier si le chargement des données s'est bien passé

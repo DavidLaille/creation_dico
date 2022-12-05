@@ -3,9 +3,9 @@ import requests
 from bs4 import BeautifulSoup
 from bs4 import SoupStrainer
 
-names_path = 'C:/dev/PycharmProjects/creation_dico/data/lemmes_noms2.csv'
-verbs_path = 'C:/dev/PycharmProjects/creation_dico/data/lemmes_verbes2.csv'
-adj_path = 'C:/dev/PycharmProjects/creation_dico/data/lemmes_adj2.csv'
+names_path = 'data/lemmes_noms2.csv'
+verbs_path = 'data/lemmes_verbes2.csv'
+adj_path = 'data/lemmes_adj2.csv'
 
 names = pd.read_csv(names_path, sep=',')
 verbs = pd.read_csv(verbs_path, sep=',')

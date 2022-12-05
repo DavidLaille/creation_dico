@@ -7,7 +7,7 @@ import pandas as pd
 
 # location of Lexique383.tsv file (adapt to your case!)
 # LEXIQUE = op.join(os.getenv('HOME'), 'data/Lexique383.tsv')
-LEXIQUE = 'C:/dev/PycharmProjects/creation_dico/data/Lexique383.tsv'
+LEXIQUE = 'data/Lexique383.tsv'
 
 lex = pd.read_csv(LEXIQUE, sep='\t')
 
