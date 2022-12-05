@@ -1,5 +1,4 @@
 import csv
-
 import pandas as pd
 
 LEXIQUE = 'data/Lexique383.tsv'
@@ -61,239 +60,184 @@ current_voisins_phonologiques_r2 = list()
 current_voisins_phonologiques_r3 = list()
 
 ########################################################################################################################
+# Ouverture des fichiers csv (et création s'ils n'existent pas)
+f_homophones = open("data/homophones.csv", 'w', newline='', encoding='utf8')
+writer_homophones = csv.writer(f_homophones)
+
+f_homophones_reverse = open("data/homophones_reverse.csv", 'w', newline='', encoding='utf8')
+writer_homophones_reverse = csv.writer(f_homophones_reverse)
+
+f_contenus = open("data/contenus.csv", 'w', newline='', encoding='utf8')
+writer_contenus = csv.writer(f_contenus)
+
+f_contenants = open("data/contenants.csv", 'w', newline='', encoding='utf8')
+writer_contenants = csv.writer(f_contenants)
+
+f_rimes_r6 = open("data/rimes_r6.csv", 'w', newline='', encoding='utf8')
+writer_rimes_r6 = csv.writer(f_rimes_r6)
+
+f_rimes_r5 = open("data/rimes_r5.csv", 'w', newline='', encoding='utf8')
+writer_rimes_r5 = csv.writer(f_rimes_r5)
+
+f_rimes_r4 = open("data/rimes_r4.csv", 'w', newline='', encoding='utf8')
+writer_rimes_r4 = csv.writer(f_rimes_r4)
+
+f_rimes_r3 = open("data/rimes_r3.csv", 'w', newline='', encoding='utf8')
+writer_rimes_r3 = csv.writer(f_rimes_r3)
+
+f_rimes_r2 = open("data/rimes_r2.csv", 'w', newline='', encoding='utf8')
+writer_rimes_r2 = csv.writer(f_rimes_r2)
+
+f_rimes_r1 = open("data/rimes_r1.csv", 'w', newline='', encoding='utf8')
+writer_rimes_r1 = csv.writer(f_rimes_r1)
+
+f_meme_debut_r6 = open("data/meme_debut_r6.csv", 'w', newline='', encoding='utf8')
+writer_meme_debut_r6 = csv.writer(f_meme_debut_r6)
+
+f_meme_debut_r5 = open("data/meme_debut_r5.csv", 'w', newline='', encoding='utf8')
+writer_meme_debut_r5 = csv.writer(f_meme_debut_r5)
+
+f_meme_debut_r4 = open("data/meme_debut_r4.csv", 'w', newline='', encoding='utf8')
+writer_meme_debut_r4 = csv.writer(f_meme_debut_r4)
+
+f_meme_debut_r3 = open("data/meme_debut_r3.csv", 'w', newline='', encoding='utf8')
+writer_meme_debut_r3 = csv.writer(f_meme_debut_r3)
+
+f_meme_debut_r2 = open("data/meme_debut_r2.csv", 'w', newline='', encoding='utf8')
+writer_meme_debut_r2 = csv.writer(f_meme_debut_r2)
+
+f_meme_debut_r1 = open("data/meme_debut_r1.csv", 'w', newline='', encoding='utf8')
+writer_meme_debut_r1 = csv.writer(f_meme_debut_r1)
+
+f_voisins_phonologiques_r1 = open("data/voisins_phonologiques_r1.csv", 'w', newline='', encoding='utf8')
+writer_voisins_phonologiques_r1 = csv.writer(f_voisins_phonologiques_r1)
+
+f_voisins_phonologiques_r2 = open("data/voisins_phonologiques_r2.csv", 'w', newline='', encoding='utf8')
+writer_voisins_phonologiques_r2 = csv.writer(f_voisins_phonologiques_r2)
+
+f_voisins_phonologiques_r3 = open("data/voisins_phonologiques_r3.csv", 'w', newline='', encoding='utf8')
+writer_voisins_phonologiques_r3 = csv.writer(f_voisins_phonologiques_r3)
+########################################################################################################################
+
+########################################################################################################################
 # Création des en-tête pour chaque liste de mots
 # En-tête des homophones
 print("###############################################################################################################")
 print("Début Création headers.")
-with open("data/homophones.csv", 'w', newline='', encoding='utf8') as csvfile:
-    writer = csv.writer(csvfile)
-
-    header = ["Mot"]
-    for i in range(1, 21):  # on crée 20 colonnes
-        header.append("h_" + str(i))
-    writer.writerow(header)
+header = ["Mot"]
+for i in range(1, 21):  # on crée 20 colonnes
+    header.append("h_" + str(i))
+writer_homophones.writerow(header)
 
 # En-tête des mots qui se prononcent pareil à l'envers (phonologie renversée identique)
-with open("data/homophones_reverse.csv", 'w', newline='', encoding='utf8') as csvfile:
-    writer = csv.writer(csvfile)
-
-    header = ["Mot"]
-    for i in range(1, 21):  # on crée 20 colonnes
-        header.append("hr_" + str(i))
-    writer.writerow(header)
+header = ["Mot"]
+for i in range(1, 21):  # on crée 20 colonnes
+    header.append("hr_" + str(i))
+writer_homophones_reverse.writerow(header)
 
 # En-tête des mots contenus dans un autre mot
-with open("data/contenus.csv", 'w', newline='', encoding='utf8') as csvfile:
-    writer = csv.writer(csvfile)
-
-    header = ["Mot"]
-    for i in range(1, 501):  # on crée 500 colonnes
-        header.append("in_" + str(i))
-    writer.writerow(header)
+header = ["Mot"]
+for i in range(1, 501):  # on crée 500 colonnes
+    header.append("in_" + str(i))
+writer_contenus.writerow(header)
 
 # En-tête des mots contenants un autre mot
-with open("data/contenants.csv", 'w', newline='', encoding='utf8') as csvfile:
-    writer = csv.writer(csvfile)
-
-    header = ["Mot"]
-    for i in range(1, 201):  # on crée 200 colonnes
-        header.append("around_" + str(i))
-    writer.writerow(header)
+header = ["Mot"]
+for i in range(1, 201):  # on crée 200 colonnes
+    header.append("around_" + str(i))
+writer_contenants.writerow(header)
 
 # En-tête des rimes de rang 6 (6 derniers phonèmes identiques)
-with open("data/rimes_r6.csv", 'w', newline='', encoding='utf8') as csvfile:
-    writer = csv.writer(csvfile)
-
-    header = ["Mot"]
-    for i in range(1, 21):  # on crée 20 colonnes
-        header.append("r6_" + str(i))
-    writer.writerow(header)
+header = ["Mot"]
+for i in range(1, 21):  # on crée 20 colonnes
+    header.append("r6_" + str(i))
+writer_rimes_r6.writerow(header)
 
 # En-tête des rimes de rang 5 (5 derniers phonèmes identiques)
-with open("data/rimes_r5.csv", 'w', newline='', encoding='utf8') as csvfile:
-    writer = csv.writer(csvfile)
-
-    header = ["Mot"]
-    for i in range(1, 21):  # on crée 50 colonnes
-        header.append("r5_" + str(i))
-    writer.writerow(header)
+header = ["Mot"]
+for i in range(1, 21):  # on crée 50 colonnes
+    header.append("r5_" + str(i))
+writer_rimes_r5.writerow(header)
 
 # En-tête des rimes de rang 4 (4 derniers phonèmes identiques)
-with open("data/rimes_r4.csv", 'w', newline='', encoding='utf8') as csvfile:
-    writer = csv.writer(csvfile)
-
-    header = ["Mot"]
-    for i in range(1, 101):  # on crée 100 colonnes
-        header.append("r4_" + str(i))
-    writer.writerow(header)
+header = ["Mot"]
+for i in range(1, 101):  # on crée 100 colonnes
+    header.append("r4_" + str(i))
+writer_rimes_r4.writerow(header)
 
 # En-tête des rimes de rang 3 (3 derniers phonèmes identiques)
-with open("data/rimes_r3.csv", 'w', newline='', encoding='utf8') as csvfile:
-    writer = csv.writer(csvfile)
-
-    header = ["Mot"]
-    for i in range(1, 501):  # on crée 500 colonnes
-        header.append("r3_" + str(i))
-    writer.writerow(header)
+header = ["Mot"]
+for i in range(1, 501):  # on crée 500 colonnes
+    header.append("r3_" + str(i))
+writer_rimes_r3.writerow(header)
 
 # En-tête des rimes de rang 2 (2 derniers phonèmes identiques)
-with open("data/rimes_r2.csv", 'w', newline='', encoding='utf8') as csvfile:
-    writer = csv.writer(csvfile)
-
-    header = ["Mot"]
-    for i in range(1, 2001):  # on crée 2000 colonnes
-        header.append("r2_" + str(i))
-    writer.writerow(header)
+header = ["Mot"]
+for i in range(1, 2001):  # on crée 2000 colonnes
+    header.append("r2_" + str(i))
+writer_rimes_r2.writerow(header)
 
 # En-tête des rimes de rang 1 (juste le dernier phonème identique)
-with open("data/rimes_r1.csv", 'w', newline='', encoding='utf8') as csvfile:
-    writer = csv.writer(csvfile)
-
-    header = ["Mot"]
-    for i in range(1, 15001):  # on crée 15000 colonnes
-        header.append("r1_" + str(i))
-    writer.writerow(header)
+header = ["Mot"]
+for i in range(1, 15001):  # on crée 15000 colonnes
+    header.append("r1_" + str(i))
+writer_rimes_r1.writerow(header)
 
 # En-tête des mots commençant pareil de rang 6 (6 premiers phonèmes identiques)
-with open("data/meme_debut_r6.csv", 'w', newline='', encoding='utf8') as csvfile:
-    writer = csv.writer(csvfile)
-
-    header = ["Mot"]
-    for i in range(1, 21):  # on crée 20 colonnes
-        header.append("md_r6_" + str(i))
-    writer.writerow(header)
+header = ["Mot"]
+for i in range(1, 21):  # on crée 20 colonnes
+    header.append("md_r6_" + str(i))
+writer_meme_debut_r6.writerow(header)
 
 # En-tête des mots commençant pareil de rang 5 (5 premiers phonèmes identiques)
-with open("data/meme_debut_r5.csv", 'w', newline='', encoding='utf8') as csvfile:
-    writer = csv.writer(csvfile)
-
-    header = ["Mot"]
-    for i in range(1, 21):  # on crée 50 colonnes
-        header.append("md_r5_" + str(i))
-    writer.writerow(header)
+header = ["Mot"]
+for i in range(1, 21):  # on crée 50 colonnes
+    header.append("md_r5_" + str(i))
+writer_meme_debut_r5.writerow(header)
 
 # En-tête des mots commençant pareil de rang 4 (4 premiers phonèmes identiques)
-with open("data/meme_debut_r4.csv", 'w', newline='', encoding='utf8') as csvfile:
-    writer = csv.writer(csvfile)
-
-    header = ["Mot"]
-    for i in range(1, 101):  # on crée 100 colonnes
-        header.append("md_r4_" + str(i))
-    writer.writerow(header)
+header = ["Mot"]
+for i in range(1, 101):  # on crée 100 colonnes
+    header.append("md_r4_" + str(i))
+writer_meme_debut_r4.writerow(header)
 
 # En-tête des mots commençant pareil de rang 3 (3 premiers phonèmes identiques)
-with open("data/meme_debut_r3.csv", 'w', newline='', encoding='utf8') as csvfile:
-    writer = csv.writer(csvfile)
-
-    header = ["Mot"]
-    for i in range(1, 501):  # on crée 500 colonnes
-        header.append("md_r3_" + str(i))
-    writer.writerow(header)
+header = ["Mot"]
+for i in range(1, 501):  # on crée 500 colonnes
+    header.append("md_r3_" + str(i))
+writer_meme_debut_r3.writerow(header)
 
 # En-tête des mots commençant pareil de rang 2 (2 premiers phonèmes identiques)
-with open("data/meme_debut_r2.csv", 'w', newline='', encoding='utf8') as csvfile:
-    writer = csv.writer(csvfile)
-
-    header = ["Mot"]
-    for i in range(1, 2001):  # on crée 2000 colonnes
-        header.append("md_r2_" + str(i))
-    writer.writerow(header)
+header = ["Mot"]
+for i in range(1, 2001):  # on crée 2000 colonnes
+    header.append("md_r2_" + str(i))
+writer_meme_debut_r2.writerow(header)
 
 # En-tête des mots commençant pareil de rang 1 (juste le premier phonème identique)
-with open("data/meme_debut_r1.csv", 'w', newline='', encoding='utf8') as csvfile:
-    writer = csv.writer(csvfile)
-
-    header = ["Mot"]
-    for i in range(1, 15001):  # on crée 15000 colonnes
-        header.append("md_r1_" + str(i))
-    writer.writerow(header)
+header = ["Mot"]
+for i in range(1, 15001):  # on crée 15000 colonnes
+    header.append("md_r1_" + str(i))
+writer_meme_debut_r1.writerow(header)
 
 # En-tête des voisins phonologiques de rang 1 (un seul phonème différent)
-with open("data/voisins_phonologiques_r1.csv", 'w', newline='', encoding='utf8') as csvfile:
-    writer = csv.writer(csvfile)
-
-    header = ["Mot"]
-    for i in range(1, 201):  # on crée 200 colonnes
-        header.append("vp_r1_" + str(i))
-    writer.writerow(header)
+header = ["Mot"]
+for i in range(1, 201):  # on crée 200 colonnes
+    header.append("vp_r1_" + str(i))
+writer_voisins_phonologiques_r1.writerow(header)
 
 # En-tête des voisins phonologiques de rang 2 (2 phonèmes différents)
-with open("data/voisins_phonologiques_r2.csv", 'w', newline='', encoding='utf8') as csvfile:
-    writer = csv.writer(csvfile)
-
-    header = ["Mot"]
-    for i in range(1, 201):  # on crée 200 colonnes
-        header.append("vp_r2_" + str(i))
-    writer.writerow(header)
+header = ["Mot"]
+for i in range(1, 201):  # on crée 200 colonnes
+    header.append("vp_r2_" + str(i))
+writer_voisins_phonologiques_r2.writerow(header)
 
 # En-tête des voisins phonologiques de rang 3 (3 phonèmes différents)
-with open("data/voisins_phonologiques_r3.csv", 'w', newline='', encoding='utf8') as csvfile:
-    writer = csv.writer(csvfile)
-
-    header = ["Mot"]
-    for i in range(1, 5001):  # on crée 5000 colonnes
-        header.append("vp_r3_" + str(i))
-    writer.writerow(header)
-
+header = ["Mot"]
+for i in range(1, 5001):  # on crée 5000 colonnes
+    header.append("vp_r3_" + str(i))
+writer_voisins_phonologiques_r3.writerow(header)
 print("Fin Création headers.")
 print("###############################################################################################################")
-
-f_homophones = open("data/homophones.csv", 'a', newline='', encoding='utf8')
-writer_homophones = csv.writer(f_homophones)
-
-f_homophones_reverse = open("data/homophones_reverse.csv", 'a', newline='', encoding='utf8')
-writer_homophones_reverse = csv.writer(f_homophones_reverse)
-
-f_contenus = open("data/contenus.csv", 'a', newline='', encoding='utf8')
-writer_contenus = csv.writer(f_contenus)
-
-f_contenants = open("data/contenants.csv", 'a', newline='', encoding='utf8')
-writer_contenants = csv.writer(f_contenants)
-
-f_rimes_r6 = open("data/rimes_r6.csv", 'a', newline='', encoding='utf8')
-writer_rimes_r6 = csv.writer(f_rimes_r6)
-
-f_rimes_r5 = open("data/rimes_r5.csv", 'a', newline='', encoding='utf8')
-writer_rimes_r5 = csv.writer(f_rimes_r5)
-
-f_rimes_r4 = open("data/rimes_r4.csv", 'a', newline='', encoding='utf8')
-writer_rimes_r4 = csv.writer(f_rimes_r4)
-
-f_rimes_r3 = open("data/rimes_r3.csv", 'a', newline='', encoding='utf8')
-writer_rimes_r3 = csv.writer(f_rimes_r3)
-
-f_rimes_r2 = open("data/rimes_r2.csv", 'a', newline='', encoding='utf8')
-writer_rimes_r2 = csv.writer(f_rimes_r2)
-
-f_rimes_r1 = open("data/rimes_r1.csv", 'a', newline='', encoding='utf8')
-writer_rimes_r1 = csv.writer(f_rimes_r1)
-
-f_meme_debut_r6 = open("data/meme_debut_r6.csv", 'a', newline='', encoding='utf8')
-writer_meme_debut_r6 = csv.writer(f_meme_debut_r6)
-
-f_meme_debut_r5 = open("data/meme_debut_r5.csv", 'a', newline='', encoding='utf8')
-writer_meme_debut_r5 = csv.writer(f_meme_debut_r5)
-
-f_meme_debut_r4 = open("data/meme_debut_r4.csv", 'a', newline='', encoding='utf8')
-writer_meme_debut_r4 = csv.writer(f_meme_debut_r4)
-
-f_meme_debut_r3 = open("data/meme_debut_r3.csv", 'a', newline='', encoding='utf8')
-writer_meme_debut_r3 = csv.writer(f_meme_debut_r3)
-
-f_meme_debut_r2 = open("data/meme_debut_r2.csv", 'a', newline='', encoding='utf8')
-writer_meme_debut_r2 = csv.writer(f_meme_debut_r2)
-
-f_meme_debut_r1 = open("data/meme_debut_r1.csv", 'a', newline='', encoding='utf8')
-writer_meme_debut_r1 = csv.writer(f_meme_debut_r1)
-
-f_voisins_phonologiques_r1 = open("data/voisins_phonologiques_r1.csv", 'a', newline='', encoding='utf8')
-writer_voisins_phonologiques_r1 = csv.writer(f_voisins_phonologiques_r1)
-
-f_voisins_phonologiques_r2 = open("data/voisins_phonologiques_r2.csv", 'a', newline='', encoding='utf8')
-writer_voisins_phonologiques_r2 = csv.writer(f_voisins_phonologiques_r2)
-
-f_voisins_phonologiques_r3 = open("data/voisins_phonologiques_r3.csv", 'a', newline='', encoding='utf8')
-writer_voisins_phonologiques_r3 = csv.writer(f_voisins_phonologiques_r3)
 
 for i, word in enumerate(words):
     if i > 20:
