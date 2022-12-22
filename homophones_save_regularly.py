@@ -240,8 +240,8 @@ print("Fin Création headers.")
 print("###############################################################################################################")
 
 for i, word in enumerate(words):
-    if i > 20:
-        continue
+    # if i > 20:
+    #     continue
 
     phon_ref = phon_words[i]
     print(f"{i} - Mot référence : {word} - Phonologie : {phon_ref}")
