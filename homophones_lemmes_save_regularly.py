@@ -27,31 +27,11 @@ print(f"Liste des phonologies inversées des mots : {phon_renv_words[0:20]}")
 print(f"Taille de la liste des phonologies des mots : {len(phon_words)}")
 print(f"Taille de la liste des phonologies inversées des mots : {len(phon_renv_words)}")
 
-dico_homophones = dict()
-dico_phon_renv = dict()
-dico_contenu = dict()
-dico_conteneur = dict()
-
-dico_rimes_r2 = dict()
-dico_rimes_r3 = dict()
-dico_rimes_r4 = dict()
-dico_rimes_r5 = dict()
-dico_rimes_r6 = dict()
-dico_meme_debut_r1 = dict()
-dico_meme_debut_r2 = dict()
-dico_meme_debut_r3 = dict()
-dico_meme_debut_r4 = dict()
-dico_meme_debut_r5 = dict()
-dico_meme_debut_r6 = dict()
-dico_voisins_phonologiques_r1 = dict()
-dico_voisins_phonologiques_r2 = dict()
-dico_voisins_phonologiques_r3 = dict()
-
-
 current_homophones = list()
 current_phon_renv = list()
 current_contenu = list()
 current_conteneur = list()
+current_rimes_r1 = list()
 current_rimes_r2 = list()
 current_rimes_r3 = list()
 current_rimes_r4 = list()
@@ -95,6 +75,9 @@ writer_rimes_r3 = csv.writer(f_rimes_r3)
 
 f_rimes_r2 = open("data/lexiques_homophonies_lemmes/rimes_r2.csv", 'w', newline='', encoding='utf8')
 writer_rimes_r2 = csv.writer(f_rimes_r2)
+
+f_rimes_r1 = open("data/lexiques_homophonies_lemmes/rimes_r1.csv", 'w', newline='', encoding='utf8')
+writer_rimes_r1 = csv.writer(f_rimes_r1)
 
 f_meme_debut_r6 = open("data/lexiques_homophonies_lemmes/meme_debut_r6.csv", 'w', newline='', encoding='utf8')
 writer_meme_debut_r6 = csv.writer(f_meme_debut_r6)
@@ -149,57 +132,63 @@ for i in range(1, 501):  # on crée 500 colonnes
     header.append("in_" + str(i))
 writer_contenus.writerow(header)
 
-# En-tête des mots contenants un autre mot
+# En-tête des mots contenant un autre mot
 header = ["Mot"]
-for i in range(1, 201):  # on crée 200 colonnes
+for i in range(1, 4001):  # on crée 4000 colonnes
     header.append("around_" + str(i))
 writer_contenants.writerow(header)
 
 # En-tête des rimes de rang 6 (6 derniers phonèmes identiques)
 header = ["Mot"]
-for i in range(1, 21):  # on crée 20 colonnes
+for i in range(1, 211):  # on crée 210 colonnes
     header.append("r6_" + str(i))
 writer_rimes_r6.writerow(header)
 
 # En-tête des rimes de rang 5 (5 derniers phonèmes identiques)
 header = ["Mot"]
-for i in range(1, 21):  # on crée 50 colonnes
+for i in range(1, 221):  # on crée 220 colonnes
     header.append("r5_" + str(i))
 writer_rimes_r5.writerow(header)
 
 # En-tête des rimes de rang 4 (4 derniers phonèmes identiques)
 header = ["Mot"]
-for i in range(1, 101):  # on crée 100 colonnes
+for i in range(1, 1201):  # on crée 1200 colonnes
     header.append("r4_" + str(i))
 writer_rimes_r4.writerow(header)
 
 # En-tête des rimes de rang 3 (3 derniers phonèmes identiques)
 header = ["Mot"]
-for i in range(1, 501):  # on crée 500 colonnes
+for i in range(1, 2001):  # on crée 2000 colonnes
     header.append("r3_" + str(i))
 writer_rimes_r3.writerow(header)
 
 # En-tête des rimes de rang 2 (2 derniers phonèmes identiques)
 header = ["Mot"]
-for i in range(1, 2001):  # on crée 2000 colonnes
+for i in range(1, 4001):  # on crée 4000 colonnes
     header.append("r2_" + str(i))
 writer_rimes_r2.writerow(header)
 
+# En-tête des rimes de rang 1 (juste le dernier phonème identique)
+header = ["Mot"]
+for i in range(1, 15001):  # on crée 15000 colonnes
+    header.append("r1_" + str(i))
+writer_rimes_r1.writerow(header)
+
 # En-tête des mots commençant pareil de rang 6 (6 premiers phonèmes identiques)
 header = ["Mot"]
-for i in range(1, 51):  # on crée 20 colonnes
+for i in range(1, 51):  # on crée 50 colonnes
     header.append("md_r6_" + str(i))
 writer_meme_debut_r6.writerow(header)
 
 # En-tête des mots commençant pareil de rang 5 (5 premiers phonèmes identiques)
 header = ["Mot"]
-for i in range(1, 51):  # on crée 50 colonnes
+for i in range(1, 101):  # on crée 100 colonnes
     header.append("md_r5_" + str(i))
 writer_meme_debut_r5.writerow(header)
 
 # En-tête des mots commençant pareil de rang 4 (4 premiers phonèmes identiques)
 header = ["Mot"]
-for i in range(1, 201):  # on crée 100 colonnes
+for i in range(1, 201):  # on crée 200 colonnes
     header.append("md_r4_" + str(i))
 writer_meme_debut_r4.writerow(header)
 
@@ -211,7 +200,7 @@ writer_meme_debut_r3.writerow(header)
 
 # En-tête des mots commençant pareil de rang 2 (2 premiers phonèmes identiques)
 header = ["Mot"]
-for i in range(1, 2001):  # on crée 2000 colonnes
+for i in range(1, 4001):  # on crée 4000 colonnes
     header.append("md_r2_" + str(i))
 writer_meme_debut_r2.writerow(header)
 
@@ -229,7 +218,7 @@ writer_voisins_phonologiques_r1.writerow(header)
 
 # En-tête des voisins phonologiques de rang 2 (2 phonèmes différents)
 header = ["Mot"]
-for i in range(1, 201):  # on crée 200 colonnes
+for i in range(1, 431):  # on crée 430 colonnes
     header.append("vp_r2_" + str(i))
 writer_voisins_phonologiques_r2.writerow(header)
 
@@ -253,6 +242,7 @@ for i, word in enumerate(lemmes):
     current_contenu = []
     current_conteneur = []
 
+    current_rimes_r1 = []
     current_rimes_r2 = []
     current_rimes_r3 = []
     current_rimes_r4 = []
@@ -312,6 +302,10 @@ for i, word in enumerate(lemmes):
                 # print(f"2 derniers phonèmes du mot ref : {phon_ref[-2:]} - 2 derniers phonèmes du mot test : {phon_ref[-2:]}")
                 # print(f"Mot qui rime de rang 2 : {lemmes[j]} - Phonologie : {phon_words[j]}")
                 current_rimes_r2.append(lemmes[j])
+            elif phon_ref[-1:] == phon_word[-1:] and len(phon_ref) > 2 and len(phon_word) > 2:  # si le dernier phonème est identique (si ça rime)
+                # print(f"Dernier phonème du mot ref : {phon_ref[-1:]} - Dernier phonème du mot test : {phon_ref[-1:]}")
+                # print(f"Mot qui rime de rang 1 : {words[j]} - Phonologie : {phon_words[j]}")
+                current_rimes_r1.append(lemmes[j])
 
             if phon_ref[:6] == phon_word[:6] and len(phon_ref) > 6:  # si les 6 premiers phonèmes sont identiques
                 # print(f"6 premiers phonèmes du mot ref : {phon_ref[:6]} - 6 premiers phonèmes du mot test : {phon_ref[:6]}")
@@ -348,6 +342,7 @@ for i, word in enumerate(lemmes):
             # print(f"Mot avec phonologie renversée : {lemmes[j]} - Phonologie : {phon_words[j]}")
             current_phon_renv.append(lemmes[j])
 
+    # Écriture des données dans les fichiers csv
     if current_homophones:
         row = current_homophones
         row.insert(0, word)
@@ -394,6 +389,11 @@ for i, word in enumerate(lemmes):
         row.insert(0, word)
         # print("Ligne à ajouter : ", row)
         writer_rimes_r2.writerow(row)
+    if current_rimes_r1:
+        row = current_rimes_r1
+        row.insert(0, word)
+        # print("Ligne à ajouter : ", row)
+        writer_rimes_r1.writerow(row)
 
     if current_meme_debut_r6:
         row = current_meme_debut_r6
@@ -442,6 +442,7 @@ for i, word in enumerate(lemmes):
         # print("Ligne à ajouter : ", row)
         writer_voisins_phonologiques_r3.writerow(row)
 
+# Fermeture des fichiers csv
 f_homophones.close()
 f_homophones_reverse.close()
 f_contenus.close()
@@ -451,6 +452,7 @@ f_rimes_r5.close()
 f_rimes_r4.close()
 f_rimes_r3.close()
 f_rimes_r2.close()
+f_rimes_r1.close()
 f_meme_debut_r6.close()
 f_meme_debut_r5.close()
 f_meme_debut_r4.close()
